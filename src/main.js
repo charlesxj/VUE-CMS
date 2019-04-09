@@ -10,4 +10,4 @@ Vue.component(Header.name, Header);
 var vm = new Vue({
   el: '#app',
   render: a => a(app)
-});
+}); 
