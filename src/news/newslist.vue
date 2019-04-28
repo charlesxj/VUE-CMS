@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       newslist: [],
-      imgUrl: "http://10.1.1.10:8011"
+      imgUrl: this.GLOBALVAR.urlhost
     };
   },
   filters: {
@@ -71,9 +71,9 @@ export default {
     this.getNewsList();
   },
   methods: {
-    getNewsList() {
+    getNewsList() {       
       var _this = this;
-      axios.get("http://10.1.1.10:8011/api/values").then(
+      axios.get(this.GLOBALVAR.urlhost+"/api/values").then(
         function(res) {
           if (res.data.status === 0) {
             console.log(res.data.message);

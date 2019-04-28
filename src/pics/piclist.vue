@@ -16,10 +16,14 @@
         <a class="mui-control-item">娱乐</a>
         <a class="mui-control-item">科技</a>-->
       </div>
-      <ul>
-          <li v-for="item in list" :key="item">
-              <img v-lazy="item">
-          </li>
+      <ul class="photo-list">
+        <li v-for="(item,index) in imgList" :key="index">
+          <img v-lazy="item.img_url">
+          <div class="info">
+            <h1 class="info-title">{{item.title}}</h1>
+            <div class="info-body">{{item.zhaiyao}}</div>
+          </div>
+        </li>
       </ul>
     </div>
   </div>
@@ -32,7 +36,9 @@ import axios from "axios";
 export default {
   data() {
     return {
-      imgcategroy: []
+      imgcategroy: [],
+      currentIndex: 0,
+      imgList: []
     };
   },
   mounted() {
@@ -55,13 +61,25 @@ export default {
   },
   methods: {
     getImgCategroy() {
-      axios.get("http://10.1.1.10:8011/api/values").then(
+      axios.get(this.GLOBALVAR.urlhost + "/api/ImgCategory").then(
         a => {
           if (a.data.status === 0) {
             a.data.message.unshift({ title: "全部", id: 0 });
             this.imgcategroy = a.data.message;
           }
-          console.log(this.imgcategroy);
+
+          this.getImgInfo(0);
+        },
+        e => {}
+      );
+    },
+    getImgInfo(index) {
+      axios.get(this.GLOBALVAR.urlhost + "/api/ImgCategory/" + index).then(
+        a => {
+          if (a.data.status === 0) {
+            this.imgList = a.data.message;
+            console.log(this.imgList);
+          }
         },
         e => {}
       );
@@ -75,9 +93,48 @@ export default {
   touch-action: pan-y;
 }
 
-img[lazy='loading']{
-    width: 40px;
-    height: 300px;
-    margin:auto;
+.photo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin: 50px 0;
+  li {
+    background-color: #ccc;
+    text-align: center;
+    margin-bottom: 10px;
+    box-shadow: 0 0 9px #999;
+    margin: 10px;
+    position: relative;
+
+    img[lazy="loading"] {
+      width: 40px;
+      height: 300px;
+      margin: auto;
+    }
+    img {
+      width: 100%;
+      vertical-align: middle;
+    }
+
+    .info {
+      z-index:199;
+      color: white;
+      text-align: left;
+      position: absolute;
+      bottom: 0px;
+      background-color: rgba(0, 0, 0, 0.4);
+      // max-height: 84px;
+      overflow: hidden;
+      width:100%;
+      max-height: 84px;
+      .info-title {
+        font-size: 14px;        
+      }
+
+      .info-body {
+        font-size: 13px;
+      }
+    }
+  }
 }
 </style>

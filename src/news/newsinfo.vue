@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     GetNewsInfo() {
-      axios.get("http://10.1.1.10:8011/api/values/" + this.id).then(
+      axios.get(this.GLOBALVAR.urlhost+"/api/values/" + this.id).then(
         a => {
           if(a.data.status===0){
             console.log(a.data.message);

@@ -34,6 +34,9 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+.mint-header{
+  z-index:99;
+}
 .app-container {
   padding-top: 40px;
   overflow-x: hidden;

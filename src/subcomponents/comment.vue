@@ -32,18 +32,17 @@ export default {
   },
   methods: {
     AddCommentInfo() {
-        if(this.content.trim().length<1)
-        {
-            Toast('评论后才能发表哦~');
-            return;
-        }
+      if (this.content.trim().length < 1) {
+        Toast("评论后才能发表哦~");
+        return;
+      }
       var FormParams = {
         belongId: this.id,
         content: this.content,
         user_name: "匿名啦"
       };
       console.log(this.content);
-      axios.post("http://10.1.1.10:8011/api/comments/", FormParams).then(
+      axios.post(this.GLOBALVAR.urlhost + "/api/comments/", FormParams).then(
         a => {
           Toast("评论成功");
           this.comments.unshift(FormParams);
@@ -57,7 +56,8 @@ export default {
     GetCommentInfo() {
       axios
         .get(
-          "http://10.1.1.10:8011/api/comments/" +
+          this.GLOBALVAR.urlhost +
+            "/api/comments/" +
             this.id +
             "?pageindex=" +
             this.pageindex
