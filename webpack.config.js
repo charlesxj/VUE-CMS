@@ -1,3 +1,6 @@
+
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+
 // 由于 webpack 是基于Node进行构建的，所有，webpack的配置文件中，任何合法的Node代码都是支持的
 var path = require('path')
 // 在内存中，根据指定的模板页面，生成一份内存中的首页，同时自动把打包好的bundle注入到页面底部
@@ -15,7 +18,8 @@ module.exports = {
     new htmlWebpackPlugin({
       template: path.join(__dirname, './src/index.html'), // 指定模板文件路径
       filename: 'index.html' // 设置生成的内存页面的名称
-    })
+    }),
+    new VueLoaderPlugin()
   ],
   module: { // 配置所有第三方loader 模块的
     rules: [ // 第三方模块的匹配规则
