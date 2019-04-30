@@ -9,6 +9,7 @@
           :class="['mui-control-item',item.id==0?'mui-active':'']"
           v-for="item in imgcategroy"
           :key="item.id"
+          @click="getImgInfo(item.id)"
         >{{item.id}}-{{item.title}}</a>
         <!-- <a class="mui-control-item">热点</a>
         <a class="mui-control-item">北京</a>
@@ -17,13 +18,13 @@
         <a class="mui-control-item">科技</a>-->
       </div>
       <ul class="photo-list">
-        <li v-for="(item,index) in imgList" :key="index">
+        <router-link v-for="(item,index) in imgList" :key="index" :to="'/home/picinfo/'+item.subid" tag='li'>
           <img v-lazy="item.img_url">
           <div class="info">
             <h1 class="info-title">{{item.title}}</h1>
             <div class="info-body">{{item.zhaiyao}}</div>
           </div>
-        </li>
+        </router-link>
       </ul>
     </div>
   </div>
@@ -97,7 +98,7 @@ export default {
   list-style: none;
   margin: 0;
   padding: 0;
-  margin: 50px 0;
+  margin: 55px 0;
   li {
     background-color: #ccc;
     text-align: center;

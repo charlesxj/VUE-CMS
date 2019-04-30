@@ -2,9 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import globalvar from './commonvue/global.vue'
+import VuePreview from 'vue-preview'
 Vue.use(VueResource)
 
 Vue.use(VueRouter)
+
+// Vue.use(VuePreview)
 
 // Vue.http.options.root="http://localhost:59105"
 Vue.http.options.emulateJSON = true;
@@ -52,7 +55,17 @@ Vue.filter('dateFormat222', function (value, fmt = "YYYY-MM-DD HH:mm:ss") {
   return fmt;
 })
 
-
+// with parameters install
+Vue.use(VuePreview, {
+  mainClass: 'pswp--minimal--dark',
+  barsSize: {top: 0, bottom: 0},
+  captionEl: false,
+  fullscreenEl: false,
+  shareEl: false,
+  bgOpacity: 0.85,
+  tapToClose: true,
+  tapToToggleControls: false
+})
 
 // import { Header } from 'mint-ui'
 // import { Swipe, SwipeItem, Button } from 'mint-ui';

@@ -9,6 +9,11 @@ import Newslist from './news/newslist.vue'
 import newsinfo from './news/newsinfo.vue'
 
 import piclist from './pics/piclist.vue'
+import picinfo from './pics/picinfo.vue'
+
+import goodslist from './goods/goodslist.vue'
+
+import goodinfo from './goods/goodinfo.vue'
 
 // 3. 创建路由对象
 var router = new VueRouter({
@@ -24,8 +29,11 @@ var router = new VueRouter({
     { path: '/shopcart', component: Shopcart },
     { path: '/search', component: Search },
     { path: '/home/newslist', component: Newslist },
-    { path: '/home/newsinfo/:id', component: newsinfo},
-    {path:'/home/piclist',component:piclist},
+    { path: '/home/newsinfo/:id', component: newsinfo },
+    { path: '/home/piclist', component: piclist },
+    { path: '/home/picinfo/:id', component: picinfo },
+    { path: '/home/goodslist', component: goodslist },
+    { path: '/home/goodinfo/:id', component: goodinfo,name:'goodinfo-route' }
   ],
   linkActiveClass: 'mui-active',
   // mode:'history'
