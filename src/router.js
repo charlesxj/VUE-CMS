@@ -15,6 +15,9 @@ import goodslist from './goods/goodslist.vue'
 
 import goodinfo from './goods/goodinfo.vue'
 
+import goodinfodesc from './goods/goodinfodesc.vue'
+import goodinfocomment from './goods/goodinfo_comment.vue'
+
 // 3. 创建路由对象
 var router = new VueRouter({
   routes: [
@@ -33,7 +36,9 @@ var router = new VueRouter({
     { path: '/home/piclist', component: piclist },
     { path: '/home/picinfo/:id', component: picinfo },
     { path: '/home/goodslist', component: goodslist },
-    { path: '/home/goodinfo/:id', component: goodinfo,name:'goodinfo-route' }
+    { path: '/home/goodinfo/:id', component: goodinfo, name: 'goodinfo-route' },
+    { path: '/home/goodinfodesc/:desc', component: goodinfodesc, name: 'goodinfodesc-route' },
+    { path: '/home/goodinfo_comment/:id', component: goodinfocomment, name: 'goodinfocomment-route' }
   ],
   linkActiveClass: 'mui-active',
   // mode:'history'
