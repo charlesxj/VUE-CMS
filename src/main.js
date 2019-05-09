@@ -1,4 +1,5 @@
 import Vue from 'vue'
+// import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import globalvar from './commonvue/global.vue'
@@ -6,6 +7,8 @@ import VuePreview from 'vue-preview'
 Vue.use(VueResource)
 
 Vue.use(VueRouter)
+
+// Vue.use(Vuex)
 
 // Vue.use(VuePreview)
 
@@ -58,7 +61,7 @@ Vue.filter('dateFormat222', function (value, fmt = "YYYY-MM-DD HH:mm:ss") {
 // with parameters install
 Vue.use(VuePreview, {
   mainClass: 'pswp--minimal--dark',
-  barsSize: {top: 0, bottom: 0},
+  barsSize: { top: 0, bottom: 0 },
   captionEl: false,
   fullscreenEl: false,
   shareEl: false,
@@ -82,9 +85,15 @@ import MintUI from 'mint-ui'
 Vue.use(MintUI);
 import 'mint-ui/lib/style.css'
 
+import store from './store.js'
+
 
 var vm = new Vue({
   el: '#app',
   router: router,
-  render: a => a(app)
+  render: a => a(app),
+  store: store,
+  mounted() {
+    this.$store.state.car=JSON.parse(localStorage.getItem('car')||'[]');
+  },
 }); 

@@ -6,8 +6,7 @@
     </p>-->
 
     <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
-      <div class="ball" v-show="ballFlag" ref="ball">        
-      </div>
+      <div class="ball" v-show="ballFlag" ref="ball"></div>
     </transition>
 
     <!-- 商品轮播图区域 -->
@@ -39,6 +38,7 @@
         </div>
       </div>
     </div>
+    <div>{{this.$store.state.car}}</div>
 
     <!-- 商品详情 -->
 
@@ -82,7 +82,7 @@ export default {
     this.getgoodInfo();
   },
   methods: {
-    Getselectedcount(count) {      
+    Getselectedcount(count) {
       this.selectedcount = count;
     },
     beforeEnter(el) {
@@ -107,7 +107,25 @@ export default {
     },
 
     addToShowCar() {
+      var count = this.selectedcount;
+      this.$store.state.car.forEach(el => {
+        if (el.id == this.id) {
+          count += el.count;
+        }
+      });
+
+      if (count > this.goodInfo.stock_quantity) {
+        Toast("已经到最大库存了，无法添加啦");
+        return;
+      }
       this.ballFlag = !this.ballFlag;
+      var goodinfo = {
+        id: this.id,
+        count: this.selectedcount,
+        price: this.goodInfo.sell_price,
+        selected: true
+      };
+      this.$store.commit("addToCar", goodinfo);
     },
     gocomment() {
       console.log(this.id);
